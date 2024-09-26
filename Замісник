@@ -1,0 +1,25 @@
+#include <iostream>
+
+class Subject {
+public:
+    virtual void request() = 0;
+};
+
+class RealSubject : public Subject {
+public:
+    void request() override { std::cout << "Real Subject Request\n"; }
+};
+
+class Proxy : public Subject {
+private:
+    RealSubject* realSubject;
+public:
+    Proxy() : realSubject(new RealSubject) {}
+    void request() override { realSubject->request(); }
+};
+
+int main() {
+    Proxy proxy;
+    proxy.request();
+    return 0;
+}
