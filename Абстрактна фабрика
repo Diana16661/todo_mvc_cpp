@@ -1,0 +1,31 @@
+#include <iostream>
+#include <memory>
+
+class AbstractProductA {
+public:
+    virtual void operation() = 0;
+};
+
+class ProductA1 : public AbstractProductA {
+public:
+    void operation() override { std::cout << "Product A1\n"; }
+};
+
+class AbstractFactory {
+public:
+    virtual std::unique_ptr<AbstractProductA> createProductA() = 0;
+};
+
+class Factory1 : public AbstractFactory {
+public:
+    std::unique_ptr<AbstractProductA> createProductA() override {
+        return std::make_unique<ProductA1>();
+    }
+};
+
+int main() {
+    Factory1 factory;
+    auto product = factory.createProductA();
+    product->operation();
+    return 0;
+}
