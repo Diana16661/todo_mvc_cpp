@@ -1,0 +1,26 @@
+#include <iostream>
+
+class Target {
+public:
+    virtual void request() { std::cout << "Target Request\n"; }
+};
+
+class Adaptee {
+public:
+    void specificRequest() { std::cout << "Specific Request\n"; }
+};
+
+class Adapter : public Target {
+private:
+    Adaptee* adaptee;
+public:
+    Adapter(Adaptee* a) : adaptee(a) {}
+    void request() override { adaptee->specificRequest(); }
+};
+
+int main() {
+    Adaptee adaptee;
+    Adapter adapter(&adaptee);
+    adapter.request();
+    return 0;
+}
