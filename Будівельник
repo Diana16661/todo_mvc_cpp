@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+
+class Product {
+public:
+    void add(const std::string& part) { std::cout << "Added: " << part << "\n"; }
+};
+
+class Builder {
+public:
+    virtual void buildPart() = 0;
+    virtual Product* getResult() = 0;
+};
+
+class ConcreteBuilder : public Builder {
+private:
+    Product* product = new Product;
+public:
+    void buildPart() override { product->add("Part 1"); }
+    Product* getResult() override { return product; }
+};
+
+int main() {
+    ConcreteBuilder builder;
+    builder.buildPart();
+    Product* product = builder.getResult();
+    delete product;
+    return 0;
+}
