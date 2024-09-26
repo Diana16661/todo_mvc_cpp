@@ -1,0 +1,20 @@
+#include <iostream>
+#include <memory>
+
+class Prototype {
+public:
+    virtual std::unique_ptr<Prototype> clone() const = 0;
+};
+
+class ConcretePrototype : public Prototype {
+public:
+    std::unique_ptr<Prototype> clone() const override {
+        return std::make_unique<ConcretePrototype>(*this);
+    }
+};
+
+int main() {
+    ConcretePrototype prototype;
+    auto clone = prototype.clone();
+    return 0;
+}
