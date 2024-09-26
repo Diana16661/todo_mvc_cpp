@@ -1,0 +1,26 @@
+#include <iostream>
+
+class Implementor {
+public:
+    virtual void implementation() = 0;
+};
+
+class ConcreteImplementor : public Implementor {
+public:
+    void implementation() override { std::cout << "Concrete Implementor\n"; }
+};
+
+class Abstraction {
+protected:
+    Implementor* implementor;
+public:
+    Abstraction(Implementor* impl) : implementor(impl) {}
+    virtual void operation() { implementor->implementation(); }
+};
+
+int main() {
+    ConcreteImplementor impl;
+    Abstraction abs(&impl);
+    abs.operation();
+    return 0;
+}
