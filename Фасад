@@ -1,0 +1,28 @@
+#include <iostream>
+
+class SubsystemA {
+public:
+    void operationA() { std::cout << "Subsystem A\n"; }
+};
+
+class SubsystemB {
+public:
+    void operationB() { std::cout << "Subsystem B\n"; }
+};
+
+class Facade {
+private:
+    SubsystemA a;
+    SubsystemB b;
+public:
+    void operation() {
+        a.operationA();
+        b.operationB();
+    }
+};
+
+int main() {
+    Facade facade;
+    facade.operation();
+    return 0;
+}
