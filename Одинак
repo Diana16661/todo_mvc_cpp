@@ -1,0 +1,16 @@
+#include <iostream>
+
+class Singleton {
+public:
+    static Singleton& getInstance() {
+        static Singleton instance;
+        return instance;
+    }
+private:
+    Singleton() {}
+};
+
+int main() {
+    Singleton& singleton = Singleton::getInstance();
+    return 0;
+}
