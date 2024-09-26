@@ -1,0 +1,29 @@
+#include <iostream>
+
+class Component {
+public:
+    virtual void operation() = 0;
+};
+
+class ConcreteComponent : public Component {
+public:
+    void operation() override { std::cout << "Concrete Component\n"; }
+};
+
+class Decorator : public Component {
+protected:
+    Component* component;
+public:
+    Decorator(Component* comp) : component(comp) {}
+    void operation() override {
+        component->operation();
+        std::cout << "Decorator\n";
+    }
+};
+
+int main() {
+    ConcreteComponent comp;
+    Decorator dec(&comp);
+    dec.operation();
+    return 0;
+}
