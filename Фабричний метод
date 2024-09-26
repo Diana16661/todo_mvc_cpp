@@ -1,0 +1,31 @@
+#include <iostream>
+#include <memory>
+
+class Product {
+public:
+    virtual void use() = 0;
+};
+
+class ConcreteProduct : public Product {
+public:
+    void use() override { std::cout << "Using Concrete Product\n"; }
+};
+
+class Creator {
+public:
+    virtual std::unique_ptr<Product> factoryMethod() = 0;
+};
+
+class ConcreteCreator : public Creator {
+public:
+    std::unique_ptr<Product> factoryMethod() override {
+        return std::make_unique<ConcreteProduct>();
+    }
+};
+
+int main() {
+    ConcreteCreator creator;
+    auto product = creator.factoryMethod();
+    product->use();
+    return 0;
+}
